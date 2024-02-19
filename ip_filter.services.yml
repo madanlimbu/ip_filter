@@ -1,0 +1,14 @@
+services:
+  ip_filter.service:
+    class: Drupal\ip_filter\Service\IPFilterService
+    arguments:
+      - '@config.factory'
+      - '@request_stack'
+
+  ip_filter.event_subscriber:
+    class: Drupal\ip_filter\EventSubscriber\IPFilterEventSubscriber
+    arguments:
+      - '@config.factory'
+      - '@ip_filter.service'
+    tags:
+      - { name: event_subscriber }
